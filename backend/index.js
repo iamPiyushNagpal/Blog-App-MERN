@@ -2,12 +2,17 @@ import express from 'express';
 import './config/env.js';
 import connectDb from './database/db.js';
 import { errorHandler, notFound } from './middleware/errorMiddleware.js';
+import userRoutes from './routes/userRoutes.js';
 
 connectDb();
 
 const port = process.env.PORT;
 
 const app = express();
+
+app.use(express.json());
+
+app.use('/api/users', userRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
