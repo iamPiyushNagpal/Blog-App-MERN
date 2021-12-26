@@ -17,4 +17,9 @@ const createBlogPost = asyncHandler(async (req, res) => {
     }
 })
 
-export { createBlogPost };
+const getBlogPosts = asyncHandler(async (req, res) => {
+    const blogPosts = await blogPostModel.find({}).populate('author', 'name');
+    res.send(blogPosts);
+})
+
+export { createBlogPost, getBlogPosts };
