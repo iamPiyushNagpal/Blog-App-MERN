@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import LogInPage from './pages/LogInPage';
 import SignUpPage from './pages/SignUpPage';
 import HomePage from './pages/HomePage';
+import NewBlogPostPage from './pages/NewBlogPostPage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path='/' exact element={<HomePage />} />
             <Route path='/login' element={<LogInPage />} />
             <Route path='/signup' element={<SignUpPage />} />
+            <Route path='/create-blog-post' element={<NewBlogPostPage />} />
           </Routes>
         </div>
         <Footer />
