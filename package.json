@@ -5,7 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "server": "nodemon backend/index.js"
+    "server": "nodemon backend/index.js",
+    "client": "npm run start --prefix frontend",
+    "dev": "concurrently \"nodemon backend/index.js\" \"npm run start --prefix frontend\" "
   },
   "keywords": [],
   "author": "",
@@ -19,6 +21,7 @@
     "mongoose": "^6.1.3"
   },
   "devDependencies": {
+    "concurrently": "^6.5.1",
     "nodemon": "^2.0.15"
   }
 }
