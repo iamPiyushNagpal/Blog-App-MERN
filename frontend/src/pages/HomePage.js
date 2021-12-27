@@ -1,10 +1,11 @@
-import React from 'react'
+import { Container } from '@chakra-ui/react';
+import BlogList from '../components/BlogList';
 
 const HomePage = () => {
     return (
-        <div>
-            
-        </div>
+        <Container maxW={'container.xl'}>
+            <BlogList />
+        </Container>
     )
 }
 
