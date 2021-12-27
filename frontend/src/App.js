@@ -6,6 +6,7 @@ import LogInPage from './pages/LogInPage';
 import SignUpPage from './pages/SignUpPage';
 import HomePage from './pages/HomePage';
 import NewBlogPostPage from './pages/NewBlogPostPage';
+import BlogPostDetails from './pages/BlogPostDetails';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path='/login' element={<LogInPage />} />
             <Route path='/signup' element={<SignUpPage />} />
             <Route path='/create-blog-post' element={<NewBlogPostPage />} />
+            <Route path='/blogpost/:id' element={<BlogPostDetails />} />
           </Routes>
         </div>
         <Footer />
