@@ -23,7 +23,7 @@ const BlogList = () => {
             {loading ? <Spinner /> : error ? <Message status="error" description={error} /> :
                 <Box>
                     {blogPosts.map((blogPost) => (
-                        <Flex flexDirection={{ base: 'column', lg: 'row' }} my={5} maxW={{ base: '400', lg: "100%" }} mx={{ base: "auto" }}>
+                        <Flex key={blogPost._id} flexDirection={{ base: 'column', lg: 'row' }} my={5} maxW={{ base: '400', lg: "100%" }} mx={{ base: "auto" }}>
                             <Box my={3} flex={{ lg: "1" }} as={ReactRouterLink} to={`/blogpost/${blogPost._id}`}>
                                 <Image borderRadius={15}
                                     objectFit={'cover'}
