@@ -33,7 +33,7 @@ const BlogPostDetails = () => {
                         mx={'auto'}
                     />
                     <Heading mt={{ base: 3, md: 6 }}>{blogPost.title}</Heading>
-                    {/* <Text>{blogPost.author.name}</Text> */}
+                    <Text mt={3}>{blogPost?.author?.name}</Text>
                     <MDEditor.Markdown
                         source={blogPost.body}
                         style={{ fontSize: "20px", marginTop: "6px" }}
