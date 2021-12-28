@@ -9,7 +9,7 @@ import {
 import MDEditor from '@uiw/react-md-editor';
 import Message from '../components/Message';
 import Spinner from '../components/Spinner';
-import { Link as ReactRouterLink } from 'react-router-dom';
+import { Link as ReactRouterLink, useParams } from 'react-router-dom';
 
 const MyBlogPostsPage = () => {
 
@@ -18,6 +18,7 @@ const MyBlogPostsPage = () => {
     const onClose = () => setIsOpen(false)
     const cancelRef = useRef()
 
+    const { id } = useParams();
     const dispatch = useDispatch();
 
     const userLogin = useSelector(state => state.userLogin)
@@ -30,11 +31,11 @@ const MyBlogPostsPage = () => {
     const { error: errorDelete, loading: loadingDelete, success: successDelete } = blogPostDelete;
 
     useEffect(() => {
-        dispatch(getBlogPostsByAuthor(userInfo._id));
-    }, [dispatch, userInfo._id, successDelete])
+        dispatch(getBlogPostsByAuthor(id));
+    }, [dispatch, id, successDelete])
 
-    const deleteBlogPostHandler = (id) => {
-        dispatch(deleteBlogPost(id));
+    const deleteBlogPostHandler = (blogPostId) => {
+        dispatch(deleteBlogPost(blogPostId));
         setIsOpen(false);
     }
 
@@ -53,7 +54,7 @@ const MyBlogPostsPage = () => {
                                     src={blogPost.image} />
                             </Box>
                             <Box flex={{ lg: "2" }} mx={{ lg: "5" }}>
-                                <Text mt={{ lg: "3" }}>{userInfo.name}</Text>
+                                <Text mt={{ lg: "3" }}>{id.name}</Text>
                                 <Heading as={ReactRouterLink} to={`/blogpost/${blogPost._id}`}>{blogPost.title.slice(0, 45)}</Heading>
                                 <MDEditor.Markdown
                                     style={{ fontSize: "20px" }}
@@ -66,19 +67,21 @@ const MyBlogPostsPage = () => {
                                     colorScheme={'purple'}
                                     mt={2}
                                 >READ MORE</Button>
-                                <HStack mt={2}>
-                                    <Button
-                                        as={ReactRouterLink}
-                                        to={``}
-                                        colorScheme={'blue'}
-                                        rightIcon={<i className="fa-solid fa-pencil"></i>}
-                                    >EDIT</Button>
-                                    <Button
-                                        colorScheme={'red'}
-                                        rightIcon={<i className="fa-solid fa-trash"></i>}
-                                        onClick={() => setIsOpen(true)}
-                                    >DELETE</Button>
-                                </HStack>
+                                {id === userInfo._id &&
+                                    <HStack mt={2}>
+                                        <Button
+                                            as={ReactRouterLink}
+                                            to={``}
+                                            colorScheme={'blue'}
+                                            rightIcon={<i className="fa-solid fa-pencil"></i>}
+                                        >EDIT</Button>
+                                        <Button
+                                            colorScheme={'red'}
+                                            rightIcon={<i className="fa-solid fa-trash"></i>}
+                                            onClick={() => setIsOpen(true)}
+                                        >DELETE</Button>
+                                    </HStack>
+                                }
                             </Box>
                             <AlertDialog
                                 isOpen={isOpen}
