@@ -27,4 +27,9 @@ const getBlogPostsById = asyncHandler(async (req, res) => {
     res.send(blogPost);
 })
 
-export { createBlogPost, getBlogPosts, getBlogPostsById };
+const getBlogPostsByAuthor = asyncHandler(async (req, res) => {
+    const blogPosts = await blogPostModel.find({ author: req.params.id });
+    res.send(blogPosts);
+})
+
+export { createBlogPost, getBlogPosts, getBlogPostsById, getBlogPostsByAuthor };
