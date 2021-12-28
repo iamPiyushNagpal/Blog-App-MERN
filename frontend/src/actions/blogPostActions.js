@@ -4,7 +4,8 @@ import {
     BLOGPOST_DETAILS_FAIL, BLOGPOST_DETAILS_REQUEST, BLOGPOST_DETAILS_SUCCESS,
     BLOGPOST_LIST_FAIL, BLOGPOST_LIST_REQUEST, BLOGPOST_LIST_SUCCESS,
     BLOGPOST_LIST_BY_AUTHOR_FAIL, BLOGPOST_LIST_BY_AUTHOR_REQUEST,
-    BLOGPOST_LIST_BY_AUTHOR_SUCCESS,
+    BLOGPOST_LIST_BY_AUTHOR_SUCCESS, BLOGPOST_DELETE_REQUEST,
+    BLOGPOST_DELETE_SUCCESS, BLOGPOST_DELETE_FAIL,
 } from '../constants/blogPostConstants';
 
 export const getAllBlogPosts = () => async (dispatch) => {
@@ -100,6 +101,38 @@ export const getBlogPostsByAuthor = (id) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: BLOGPOST_LIST_BY_AUTHOR_FAIL,
+            payload: error.response && error.response.data.message ?
+                error.response.data.message : error.message
+        })
+    }
+}
+
+export const deleteBlogPost = (id) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: BLOGPOST_DELETE_REQUEST
+        })
+
+        const { userLogin: { userInfo } } = getState();
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        const { data } = await axios.delete(`/api/blogs/${id}`,
+            config
+        );
+
+        dispatch({
+            type: BLOGPOST_DELETE_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: BLOGPOST_DELETE_FAIL,
             payload: error.response && error.response.data.message ?
                 error.response.data.message : error.message
         })
