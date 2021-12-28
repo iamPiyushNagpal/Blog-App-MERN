@@ -32,4 +32,19 @@ const getBlogPostsByAuthor = asyncHandler(async (req, res) => {
     res.send(blogPosts);
 })
 
-export { createBlogPost, getBlogPosts, getBlogPostsById, getBlogPostsByAuthor };
+const deletePost = asyncHandler(async (req, res) => {
+    const blogPost = await blogPostModel.findById(req.params.id);
+    if (blogPost) {
+        await blogPost.remove();
+        res.send({ message: 'BlogPost Removed' });
+    }
+    else {
+        res.status(404);
+        throw new Error('BlogPost not found');
+    }
+})
+
+export {
+    createBlogPost, getBlogPosts, getBlogPostsById, getBlogPostsByAuthor,
+    deletePost
+};
