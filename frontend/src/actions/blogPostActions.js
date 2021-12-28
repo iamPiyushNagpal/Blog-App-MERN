@@ -2,8 +2,9 @@ import axios from 'axios';
 import {
     BLOGPOST_CREATE_FAIL, BLOGPOST_CREATE_REQUEST, BLOGPOST_CREATE_SUCCESS,
     BLOGPOST_DETAILS_FAIL, BLOGPOST_DETAILS_REQUEST, BLOGPOST_DETAILS_SUCCESS,
-
-    BLOGPOST_LIST_FAIL, BLOGPOST_LIST_REQUEST, BLOGPOST_LIST_SUCCESS
+    BLOGPOST_LIST_FAIL, BLOGPOST_LIST_REQUEST, BLOGPOST_LIST_SUCCESS,
+    BLOGPOST_LIST_BY_AUTHOR_FAIL, BLOGPOST_LIST_BY_AUTHOR_REQUEST,
+    BLOGPOST_LIST_BY_AUTHOR_SUCCESS,
 } from '../constants/blogPostConstants';
 
 export const getAllBlogPosts = () => async (dispatch) => {
@@ -77,6 +78,28 @@ export const createBlogPost = (blogPost) => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: BLOGPOST_CREATE_FAIL,
+            payload: error.response && error.response.data.message ?
+                error.response.data.message : error.message
+        })
+    }
+}
+
+export const getBlogPostsByAuthor = (id) => async (dispatch) => {
+    try {
+        dispatch({
+            type: BLOGPOST_LIST_BY_AUTHOR_REQUEST
+        })
+
+        const { data } = await axios.get(`/api/blogs/author/${id}`);
+
+        dispatch({
+            type: BLOGPOST_LIST_BY_AUTHOR_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: BLOGPOST_LIST_BY_AUTHOR_FAIL,
             payload: error.response && error.response.data.message ?
                 error.response.data.message : error.message
         })

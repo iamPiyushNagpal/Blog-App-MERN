@@ -3,7 +3,8 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { userLoginReducer, userSignupReducer } from './reducers/userReducers';
 import {
-    blogPostCreateReducer, blogPostDetailsReducer, blogPostListReducer
+    blogPostCreateReducer, blogPostDetailsReducer, blogPostListByAuthorReducer,
+    blogPostListReducer
 } from './reducers/blogPostReducer';
 
 const reducer = combineReducers({
@@ -11,7 +12,8 @@ const reducer = combineReducers({
     userSignup: userSignupReducer,
     blogPostCreate: blogPostCreateReducer,
     blogPostList: blogPostListReducer,
-    blogPostDetails: blogPostDetailsReducer
+    blogPostDetails: blogPostDetailsReducer,
+    blogPostListByAuthor: blogPostListByAuthorReducer
 });
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ?
