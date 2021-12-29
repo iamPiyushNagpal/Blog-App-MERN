@@ -4,7 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { userLoginReducer, userSignupReducer } from './reducers/userReducers';
 import {
     blogPostCreateReducer, blogPostDeleteReducer, blogPostDetailsReducer,
-    blogPostListByAuthorReducer, blogPostListReducer
+    blogPostListByAuthorReducer, blogPostListReducer, blogPostUpdateReducer
 } from './reducers/blogPostReducer';
 
 const reducer = combineReducers({
@@ -14,7 +14,8 @@ const reducer = combineReducers({
     blogPostList: blogPostListReducer,
     blogPostDetails: blogPostDetailsReducer,
     blogPostListByAuthor: blogPostListByAuthorReducer,
-    blogPostDelete: blogPostDeleteReducer
+    blogPostDelete: blogPostDeleteReducer,
+    blogPostUpdate: blogPostUpdateReducer
 });
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ?
