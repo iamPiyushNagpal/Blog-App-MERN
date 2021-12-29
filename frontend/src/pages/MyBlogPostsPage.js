@@ -9,7 +9,7 @@ import {
 import MDEditor from '@uiw/react-md-editor';
 import Message from '../components/Message';
 import Spinner from '../components/Spinner';
-import { Link as ReactRouterLink } from 'react-router-dom';
+import { Link as ReactRouterLink, useNavigate } from 'react-router-dom';
 
 const MyBlogPostsPage = () => {
 
@@ -18,6 +18,7 @@ const MyBlogPostsPage = () => {
     const onClose = () => setIsOpen(false)
     const cancelRef = useRef()
 
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const userLogin = useSelector(state => state.userLogin)
@@ -30,8 +31,13 @@ const MyBlogPostsPage = () => {
     const { error: errorDelete, loading: loadingDelete, success: successDelete } = blogPostDelete;
 
     useEffect(() => {
-        dispatch(getBlogPostsByAuthor(userInfo._id));
-    }, [dispatch, userInfo._id, successDelete])
+        if (!userInfo) {
+            navigate("/login");
+        }
+        else {
+            dispatch(getBlogPostsByAuthor(userInfo._id));
+        }
+    }, [dispatch, successDelete, userInfo, navigate])
 
     const deleteBlogPostHandler = (id) => {
         dispatch(deleteBlogPost(id));
