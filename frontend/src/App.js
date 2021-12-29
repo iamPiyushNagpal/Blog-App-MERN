@@ -21,7 +21,7 @@ function App() {
             <Route path='/signup' element={<SignUpPage />} />
             <Route path='/create-blog-post' element={<NewBlogPostPage />} />
             <Route path='/blogpost/:id' element={<BlogPostDetails />} />
-            <Route path='/blogposts/author/:id' element={<MyBlogPostsPage />} />
+            <Route path='/blogposts/my-blogposts' element={<MyBlogPostsPage />} />
           </Routes>
         </div>
         <Footer />

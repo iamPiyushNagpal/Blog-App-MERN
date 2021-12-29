@@ -30,7 +30,7 @@ const Navbar = () => {
                 />
                 <Link as={ReactRouterLink} to={"/"}><Heading size="lg">BLOG</Heading></Link>
                 <HStack display={{ base: 'none', md: 'flex' }}>
-                    {userInfo && <Button as={ReactRouterLink} to={`/blogposts/author/${userInfo._id}`}>MY POSTS</Button>}
+                    {userInfo && <Button as={ReactRouterLink} to={`/blogposts/my-blogposts`}>MY POSTS</Button>}
                     {userInfo ?
                         <Menu>
                             <MenuButton as={Button}
@@ -48,7 +48,7 @@ const Navbar = () => {
             {isOpen && (
                 <Box bgColor={'gray.100'} py={5} display={{ md: 'none' }}>
                     <VStack>
-                        {userInfo && <Button as={ReactRouterLink} to={`/blogposts/author/${userInfo._id}`}>MY POSTS</Button>}
+                        {userInfo && <Button as={ReactRouterLink} to={`/blogposts/my-blogposts`}>MY POSTS</Button>}
                         {userInfo ?
                             <Menu>
                                 <MenuButton as={Button}
