@@ -48,6 +48,12 @@ const MyBlogPostsPage = () => {
         <Container maxW={'container.xl'}>
             {loadingDelete && <Spinner />}
             {errorDelete && <Message status="error" description={error} />}
+            <Button
+                as={ReactRouterLink}
+                mt={8}
+                colorScheme={'purple'}
+                to={`/create-blog-post`}
+            >CREATE BLOG POST</Button>
             {loading ? <Spinner /> : error ? <Message status="error" description={error} /> :
                 <Box>
                     {blogPosts.map((blogPost) => (
