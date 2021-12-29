@@ -9,7 +9,7 @@
     "server": "nodemon backend/index.js",
     "client": "npm run start --prefix frontend",
     "dev": "concurrently \"nodemon backend/index.js\" \"npm run start --prefix frontend\" ",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npp run build --prefiii frontend"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npp run build --prefix frontend"
   },
   "keywords": [],
   "author": "",
