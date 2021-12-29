@@ -44,7 +44,24 @@ const deletePost = asyncHandler(async (req, res) => {
     }
 })
 
+const updateBlogPost = asyncHandler(async (req, res) => {
+    const { image, title, body } = req.body;
+
+    const blogPost = await blogPostModel.findById(req.params.id);
+    if (blogPost) {
+        blogPost.image = image
+        blogPost.title = title
+        blogPost.body = body
+        const updatedBlogPost = await blogPost.save();
+        res.send(updatedBlogPost);
+    }
+    else {
+        res.status(404);
+        throw new Error('BlogPost not found');
+    }
+})
+
 export {
     createBlogPost, getBlogPosts, getBlogPostsById, getBlogPostsByAuthor,
-    deletePost
+    deletePost, updateBlogPost
 };
