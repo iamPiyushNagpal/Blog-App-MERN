@@ -61,7 +61,25 @@ const updateBlogPost = asyncHandler(async (req, res) => {
     }
 })
 
+const createBlogPostComment = asyncHandler(async (req, res) => {
+    const { comment: blogPostComment } = req.body;
+    const blogPost = await blogPostModel.findById(req.params.id);
+    if (blogPost) {
+        const comment = {
+            comment: blogPostComment,
+            userName: req.user.name
+        }
+        blogPost.comments.push(comment);
+        await blogPost.save();
+        res.status(201).send({ message: 'Comment Added' });
+    }
+    else {
+        res.status(404);
+        throw new Error('BlogPost not found');
+    }
+})
+
 export {
     createBlogPost, getBlogPosts, getBlogPostsById, getBlogPostsByAuthor,
-    deletePost, updateBlogPost
+    deletePost, updateBlogPost, createBlogPostComment
 };

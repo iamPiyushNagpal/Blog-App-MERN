@@ -2,11 +2,12 @@ import express from "express";
 const router = express.Router();
 import { auth } from "../middleware/authMiddleware.js";
 import {
-    createBlogPost, deletePost, getBlogPosts, getBlogPostsByAuthor, getBlogPostsById,
+    createBlogPost, createBlogPostComment, deletePost, getBlogPosts, getBlogPostsByAuthor, getBlogPostsById,
     updateBlogPost
 } from "../controllers/blogPostControllers.js";
 
 router.route('/').get(getBlogPosts);
+router.route('/:id/comments').post(auth, createBlogPostComment);
 router.route('/:id')
     .get(getBlogPostsById)
     .delete(auth, deletePost)

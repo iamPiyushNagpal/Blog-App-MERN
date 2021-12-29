@@ -1,5 +1,18 @@
 import mongoose from 'mongoose';
 
+const commentSchema = mongoose.Schema({
+    comment: {
+        type: String,
+        required: true
+    },
+    userName: {
+        type: String,
+        required: true
+    }
+}, {
+    timestamps: true
+})
+
 const blogPostSchema = mongoose.Schema({
     image: {
         type: String
@@ -15,7 +28,8 @@ const blogPostSchema = mongoose.Schema({
     author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    }
+    },
+    comments: [commentSchema]
 }, {
     timestamps: true
 })
