@@ -6,7 +6,7 @@ import {
     BLOGPOST_LIST_BY_AUTHOR_FAIL, BLOGPOST_LIST_BY_AUTHOR_REQUEST,
     BLOGPOST_LIST_BY_AUTHOR_SUCCESS, BLOGPOST_DELETE_REQUEST,
     BLOGPOST_DELETE_SUCCESS, BLOGPOST_DELETE_FAIL, BLOGPOST_UPDATE_REQUEST,
-    BLOGPOST_UPDATE_SUCCESS, BLOGPOST_UPDATE_FAIL,
+    BLOGPOST_UPDATE_SUCCESS, BLOGPOST_UPDATE_FAIL, BLOGPOST_CREATE_COMMENT_REQUEST, BLOGPOST_CREATE_COMMENT_SUCCESS, BLOGPOST_CREATE_COMMENT_FAIL,
 } from '../constants/blogPostConstants';
 
 export const getAllBlogPosts = () => async (dispatch) => {
@@ -167,6 +167,38 @@ export const updateBlogPost = (blogPost) => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: BLOGPOST_UPDATE_FAIL,
+            payload: error.response && error.response.data.message ?
+                error.response.data.message : error.message
+        })
+    }
+}
+
+export const createBlogPostComment = (blogPostId, comment) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: BLOGPOST_CREATE_COMMENT_REQUEST
+        })
+
+        const { userLogin: { userInfo } } = getState();
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        const { data } = await axios.post(`/api/blogs/${blogPostId}/comments`,
+            comment,
+            config
+        );
+
+        dispatch({
+            type: BLOGPOST_CREATE_COMMENT_SUCCESS
+        })
+
+    } catch (error) {
+        dispatch({
+            type: BLOGPOST_CREATE_COMMENT_FAIL,
             payload: error.response && error.response.data.message ?
                 error.response.data.message : error.message
         })
