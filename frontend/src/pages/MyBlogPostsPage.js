@@ -75,7 +75,7 @@ const MyBlogPostsPage = () => {
                                 <HStack mt={2}>
                                     <Button
                                         as={ReactRouterLink}
-                                        to={``}
+                                        to={`/blogpost/${blogPost._id}/edit`}
                                         colorScheme={'blue'}
                                         rightIcon={<i className="fa-solid fa-pencil"></i>}
                                     >EDIT</Button>
