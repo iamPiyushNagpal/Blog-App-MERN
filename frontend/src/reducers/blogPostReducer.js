@@ -7,7 +7,8 @@ import {
     BLOGPOST_DELETE_FAIL, BLOGPOST_UPDATE_REQUEST, BLOGPOST_UPDATE_SUCCESS,
     BLOGPOST_UPDATE_FAIL, BLOGPOST_UPDATE_RESET, BLOGPOST_CREATE_COMMENT_REQUEST,
     BLOGPOST_CREATE_COMMENT_SUCCESS, BLOGPOST_CREATE_COMMENT_FAIL,
-    BLOGPOST_CREATE_COMMENT_RESET
+    BLOGPOST_CREATE_COMMENT_RESET, BLOGPOST_COMMENTS_REQUEST, BLOGPOST_COMMENTS_SUCCESS,
+    BLOGPOST_COMMENTS_FAIL
 } from "../constants/blogPostConstants"
 
 export const blogPostListReducer = (state = { blogPosts: [] }, action) => {
@@ -102,6 +103,19 @@ export const blogPostCommentCreateReducer = (state = {}, action) => {
             return { loading: false, error: action.payload }
         case BLOGPOST_CREATE_COMMENT_RESET:
             return {};
+        default:
+            return state;
+    }
+}
+
+export const blogPostCommentsReducer = (state = { comments: [] }, action) => {
+    switch (action.type) {
+        case BLOGPOST_COMMENTS_REQUEST:
+            return { loading: true }
+        case BLOGPOST_COMMENTS_SUCCESS:
+            return { loading: false, comments: action.payload }
+        case BLOGPOST_COMMENTS_FAIL:
+            return { loading: false, error: action.payload }
         default:
             return state;
     }
