@@ -18,7 +18,7 @@ const createBlogPost = asyncHandler(async (req, res) => {
 })
 
 const getBlogPosts = asyncHandler(async (req, res) => {
-    const blogPosts = await blogPostModel.find({}).populate('author', 'name');
+    const blogPosts = await blogPostModel.find({}).populate('author', 'name').sort({ createdAt: -1 });
     res.send(blogPosts);
 })
 
