@@ -2,7 +2,7 @@ import {
     Box, Flex, IconButton, useDisclosure, Link, Heading, HStack, Button, VStack,
     Menu, MenuButton, MenuList, MenuItem
 } from '@chakra-ui/react';
-import { Link as ReactRouterLink } from 'react-router-dom';
+import { Link as ReactRouterLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../actions/userActions';
 
@@ -10,6 +10,7 @@ const Navbar = () => {
 
     const { isOpen, onToggle } = useDisclosure();
 
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const userLogin = useSelector(state => state.userLogin)
@@ -17,6 +18,7 @@ const Navbar = () => {
 
     const logoutHandler = () => {
         dispatch(logout());
+        navigate("/login");
     }
 
     return (
