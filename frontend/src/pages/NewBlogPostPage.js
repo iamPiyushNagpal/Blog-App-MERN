@@ -42,14 +42,14 @@ const NewBlogPostPage = () => {
                 {error && <Message status="error" description={error} />}
                 <form onSubmit={newBlogPostHandler}>
                     <VStack spacing={'2'}>
-                        <FormControl>
+                        <FormControl isRequired>
                             <FormLabel>Image</FormLabel>
                             <Input id='image' type='text'
                                 value={image}
                                 onChange={(e) => setImage(e.target.value)}
                             />
                         </FormControl>
-                        <FormControl >
+                        <FormControl isRequired>
                             <FormLabel>Title</FormLabel>
                             <Input id='title'
                                 type='text'
@@ -57,7 +57,7 @@ const NewBlogPostPage = () => {
                                 onChange={(e) => setTitle(e.target.value)}
                             />
                         </FormControl>
-                        <FormControl mt={6}>
+                        <FormControl isRequired mt={6}>
                             <FormLabel>Body</FormLabel>
                             <MDEditor
                                 height={400}
