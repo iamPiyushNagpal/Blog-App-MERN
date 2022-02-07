@@ -54,6 +54,9 @@ const MyBlogPostsPage = () => {
                 colorScheme={'purple'}
                 to={`/create-blog-post`}
             >CREATE BLOG POST</Button>
+            {blogPosts.length === 0 && (
+                <Heading mt={10} align={'center'}>You have not created any blog post yet.</Heading>
+            )}
             {loading ? <Spinner /> : error ? <Message status="error" description={error} /> :
                 <Box>
                     {blogPosts.map((blogPost) => (
