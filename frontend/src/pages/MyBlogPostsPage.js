@@ -54,11 +54,11 @@ const MyBlogPostsPage = () => {
                 colorScheme={'purple'}
                 to={`/create-blog-post`}
             >CREATE BLOG POST</Button>
-            {blogPosts.length === 0 && (
-                <Heading mt={10} align={'center'}>You have not created any blog post yet.</Heading>
-            )}
             {loading ? <Spinner /> : error ? <Message status="error" description={error} /> :
                 <Box>
+                    {blogPosts.length === 0 && (
+                        <Heading mt={10} align={'center'}>You have not created any blog post yet.</Heading>
+                    )}
                     {blogPosts.map((blogPost) => (
                         <Flex key={blogPost._id} flexDirection={{ base: 'column', lg: 'row' }} my={5} maxW={{ base: '400', lg: "100%" }} mx={{ base: "auto" }}>
                             <Box my={3} flex={{ lg: "1" }} as={ReactRouterLink} to={`/blogpost/${blogPost._id}`}>
