@@ -27,6 +27,8 @@
 
   ```
   npm install
+  cd frontend && npm install
+  cd ../
   ```
 
   6. Run the server
