@@ -1,5 +1,6 @@
 import path from 'path';
 import express from 'express';
+import cors from 'cros';
 import './config/env.js';
 import connectDb from './database/db.js';
 import morgan from 'morgan';
@@ -12,6 +13,8 @@ connectDb();
 const port = process.env.PORT || 3001;
 
 const app = express();
+
+app.use(cors());
 
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'))
